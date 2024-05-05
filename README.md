@@ -1,44 +1,45 @@
-usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
-           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
-           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
-           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
-           [--config-env=<name>=<envvar>] <command> [<args>]
+# TungstenChemistry
 
-These are common Git commands used in various situations:
+Welcome to TungstenChemistry, a platform designed to for Mr.Poot
 
-start a working area (see also: git help tutorial)
-   clone     Clone a repository into a new directory
-   init      Create an empty Git repository or reinitialize an existing one
+## Project Plan: TungstenChem - Chemistry Learning & Competition Platform
 
-work on the current change (see also: git help everyday)
-   add       Add file contents to the index
-   mv        Move or rename a file, a directory, or a symlink
-   restore   Restore working tree files
-   rm        Remove files from the working tree and from the index
+### Key Features:
 
-examine the history and state (see also: git help revisions)
-   bisect    Use binary search to find the commit that introduced a bug
-   diff      Show changes between commits, commit and working tree, etc
-   grep      Print lines matching a pattern
-   log       Show commit logs
-   show      Show various types of objects
-   status    Show the working tree status
+#### Student Features:
+- **Puzzle Solving**: Students can solve chemistry puzzles categorized into calculation/numerical type and explanation type, earning a "puzzle rating" upon completion.
+- **Head-to-Head Competitions**: Students can compete with peers from different chemistry levels (e.g., Chemistry in the Community, Chemistry 1, Honors Chemistry, AP Chemistry) to improve their "chem rating".
+- **Lessons**: Access to lessons with short videos provided by the teacher, followed by questions for reinforcement.
 
-grow, mark and tweak your common history
-   branch    List, create, or delete branches
-   commit    Record changes to the repository
-   merge     Join two or more development histories together
-   rebase    Reapply commits on top of another base tip
-   reset     Reset current HEAD to the specified state
-   switch    Switch branches
-   tag       Create, list, delete or verify a tag object signed with GPG
+#### Teacher Features:
+- **Progress Monitoring**: Teachers can monitor student progress, including puzzle ratings, lesson completion, and chem ratings.
+- **Prompt Creation**: Teachers can create prompts during class sessions, enter them into the program, and view students' responses in real-time.
+- **Live Competitions**: Teachers can facilitate live competitions in class, projecting students' answers for all to see, with winners earning a "tungsten" and improving their chem rating.
 
-collaborate (see also: git help workflows)
-   fetch     Download objects and refs from another repository
-   pull      Fetch from and integrate with another repository or a local branch
-   push      Update remote refs along with associated objects
+### Technical Implementation:
 
-'git help -a' and 'git help -g' list available subcommands and some
-concept guides. See 'git help <command>' or 'git help <concept>'
-to read about a specific subcommand or concept.
-See 'git help git' for an overview of the system.
+#### Frontend:
+- **HTML5, CSS3, JavaScript (React.js)**: For building the user interface with interactive components for students and teachers.
+- **Websockets**: To facilitate real-time communication for live competitions and prompt responses.
+
+#### Backend:
+- **Node.js, Express.js**: For building the server-side logic and API endpoints.
+- **MongoDB**: For storing user data, puzzle records, lesson progress, and chem ratings.
+- **Socket.io**: For enabling real-time communication between server and clients during live competitions.
+
+### User Authentication and Authorization:
+- User authentication will be implemented using JWT (JSON Web Tokens) to securely authenticate users.
+- Different levels of access will be assigned to teachers and students, allowing teachers to access monitoring and prompt creation features while students can access puzzles, lessons, and competitions.
+
+### Database Schema:
+- **Users**: Store user information including username, password hash, email, and role (teacher/student)
+- **Puzzles**: Store puzzle questions, answers, types (calculation/explanation), and associated puzzle ratings
+- **Lessons**: Store lesson information including videos, follow-up questions, and completion status.
+- **Competitions**: Store competition details including participants, questions, answers, and results.
+
+## Contact
+
+For any inquiries or feedback, please contact:
+- Rehan Shah: [rehanfshah@gmail.com](mailto:rehanfshah@gmail.com)
+- Chien Leon LLC: [chienleonllc@gmail.com](mailto:chienleonllc@gmail.com)
+
