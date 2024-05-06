@@ -41,5 +41,5 @@ Welcome to TungstenChemistry, a platform designed to for Mr.Poot
 
 For any inquiries or feedback, please contact:
 - Rehan Shah: [rehanfshah@gmail.com](mailto:rehanfshah@gmail.com)
-- Chien Leon LLC: [chienleonllc@gmail.com](mailto:chienleonllc@gmail.com)
+- Leon Chien: [chienleonllc@gmail.com](mailto:chienleonllc@gmail.com)
 
