@@ -9,6 +9,11 @@
     border: none;
     cursor: pointer;
   }
+
+  .btn--test {
+    background-color: black;
+    color: white;
+  }
   
   .btn--primary {
     background-color: var(--primary);
