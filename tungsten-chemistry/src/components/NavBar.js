@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; //Leon Change
+import {signInWithGoogle} from "../firebase"
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -69,8 +70,13 @@ function Navbar() {
                 Sign In
               </Link>
             </li>
+
+            <li>
+              <h1>{localStorage.getItem("name")}</h1>
+              <img src={localStorage.getItem("pfp")}></img>
+            </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN IN</Button>}
+          {button && <Button onClick ={ signInWithGoogle }buttonStyle='btn--outline'>SIGN IN</Button>}
         </div>
       </nav>
     </>
