@@ -71,9 +71,10 @@ function Navbar() {
               </Link>
             </li>
 
-            <li>
-              <h1>{localStorage.getItem("name")}</h1>
-              <img src={localStorage.getItem("pfp")}></img>
+            <li className = 'nav-item'>
+
+              <h1> try {localStorage.getItem("name")} </h1>
+              
             </li>
           </ul>
           {button && <Button onClick ={ signInWithGoogle }buttonStyle='btn--outline'>SIGN IN</Button>}
