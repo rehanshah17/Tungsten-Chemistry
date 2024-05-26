@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import '../../App.css';
+import { Link } from 'react-router-dom';
 import Footer from '../FootNote.js';
 import { Button } from '../Button.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 
-function SignUp() {
+function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const logIn = (e) => {
+  const SignIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -22,9 +23,9 @@ function SignUp() {
   return (
     <>
       <div className='log-in-container'>
-        <form onSubmit={logIn}>
+        <form onSubmit={SignIn}>
           <h1>
-            Sign Up
+            Sign In
           </h1>
           <input
             type="email" 
@@ -38,12 +39,19 @@ function SignUp() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
-          <button type='submit'> Sign Up</button>
+          <button type='submit'> Sign In</button>
         </form>
       </div>
+      <li className='nav-item'>
+        <Link
+          to='/sign-up'
+        >
+          Sign Up
+        </Link>
+      </li>
     <Footer />
     </>
   );
 }
 
-export default SignUp;
+export default SignIn;

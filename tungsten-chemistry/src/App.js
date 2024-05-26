@@ -8,6 +8,7 @@ import Home from './components/pages/Home'
 import Puzzle from './components/pages/Puzzle'
 import Battle from './components/pages/Battle'
 import SignUp from  './components/pages/SignUp'
+import SignIn from  './components/pages/SignIn'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/puzzles' exact Component={Puzzle}/>
         <Route path='/battle' exact Component={Battle}/>
         <Route path='/sign-up' exact Component={SignUp}/>
+        <Route path='/sign-in' exact Component={SignIn}/>
       </Routes>
     </Router>  
     </>
