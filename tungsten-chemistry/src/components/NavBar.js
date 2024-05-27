@@ -36,8 +36,8 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            <img className="move-left" src={"/W.png"} width={45} height={45}/>
             TungstenChemistry
-            <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -70,7 +70,8 @@ function Navbar() {
             ) : (
               <li className='nav-item'>
                 <div className='nav-links' onClick={toggleDropdown}>
-                  {localStorage.getItem("name")} <i className='fas fa-caret-down' />
+                  <span className="username">{localStorage.getItem("name")}</span> 
+                  <i className='fas fa-caret-down' />
                 </div>
                 {dropdown && (
                   <div className='dropdown-menu'>
@@ -88,3 +89,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
