@@ -51,16 +51,6 @@ function Navbar() {
                 Puzzles
               </Link>
             </li>
-            <li className='nav-item'>
-              <Link
-                to='/battle'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Battle 
-              </Link>
-            </li>
-
             <li>
               <Link
                 to='/sign-in'
