@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
-import './NavBar.css'; //Leon Change
+import './NavBar.css'; 
 import {signInWithGoogle} from "../firebase"
 
 function Navbar() {
@@ -72,9 +72,9 @@ function Navbar() {
             </li>
 
             <li className = 'nav-item'>
-
-              <h1> try {localStorage.getItem("name")} </h1>
-              
+                <h1 className='nav-links' onClick={closeMobileMenu}> 
+                {localStorage.getItem("name")} 
+                </h1>          
             </li>
           </ul>
           {button && <Button onClick ={ signInWithGoogle }buttonStyle='btn--outline'>SIGN IN</Button>}

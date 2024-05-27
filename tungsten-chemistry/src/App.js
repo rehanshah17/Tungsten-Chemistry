@@ -7,23 +7,20 @@ import './App.css'
 import Home from './components/pages/Home'
 import Puzzle from './components/pages/Puzzle'
 import Battle from './components/pages/Battle'
-import SignUp from  './components/pages/SignUp'
-import SignIn from  './components/pages/SignIn'
+import CreatePost from './components/pages/CreatePost';
+
 
 function App() {
   return (
-    <>
     <Router>
       <NavBar />
       <Routes>
         <Route path='/' exact Component={Home}/>
         <Route path='/puzzles' exact Component={Puzzle}/>
         <Route path='/battle' exact Component={Battle}/>
-        <Route path='/sign-up' exact Component={SignUp}/>
-        <Route path='/sign-in' exact Component={SignIn}/>
+        <Route path='/createpost' exact Component={CreatePost}/>
       </Routes>
     </Router>  
-    </>
   );
 }
 
