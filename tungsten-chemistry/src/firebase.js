@@ -29,7 +29,7 @@ export const signInWithGoogle = (navigate) => {
       localStorage.setItem("name", user.displayName);
       localStorage.setItem("email", user.email);
       localStorage.setItem("pfp", user.photoURL);
-      navigate('/'); // Redirect to home after sign-in
+      navigate('/');
     })
     .catch((error) => {
       console.log(error);

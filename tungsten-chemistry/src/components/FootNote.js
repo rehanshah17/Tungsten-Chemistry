@@ -11,14 +11,9 @@ function Footer() {
         </p>
         <p className='footer-subscription-text'>
            Contact Us:
+           rehans0906@gmail.com
+           chienleonllc@gmail.com
         </p>
-        <div className='input-areas'>
-            <form>
-                <input type="email" name="email" placeholder='Your Email' className='footer-input'>
-                </input>
-                <Button buttonStyle="btn--primary"> Enter</Button>
-            </form>
-        </div>
       </section>
     </div>
   )

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../CreatePost.css'; 
 import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
+import Footer from '../FootNote.js';
 
 function CreatePost() {
   const [title, setTitle] = useState("");
@@ -20,7 +21,8 @@ function CreatePost() {
   };
 
   return (
-    <div className="createPostPage">
+    <>
+      <div className="createPostPage">
       <div className='cpContainer'>
         <h1>Create A Post</h1>
         <div className='inputGp'> 
@@ -38,6 +40,10 @@ function CreatePost() {
         <button onClick={createPost}>Submit Post</button>
       </div>
     </div>
+
+      <Footer />
+    </>
+    
   );
 }
 
