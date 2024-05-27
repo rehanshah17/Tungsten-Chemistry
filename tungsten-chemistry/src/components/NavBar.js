@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
-import './NavBar.css'; 
-import {signInWithGoogle} from "../firebase"
+import { Link, useNavigate } from 'react-router-dom';
+import './NavBar.css';
+import { signInWithGoogle, onAuthChange, signOutUser } from "../firebase";
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [user, setUser] = useState(null);
+  const [dropdown, setDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -19,8 +22,11 @@ function Navbar() {
     }
   };
 
+  const toggleDropdown = () => setDropdown(!dropdown);
+
   useEffect(() => {
     showButton();
+    onAuthChange(setUser); // Listen for auth state changes
   }, []);
 
   window.addEventListener('resize', showButton);
@@ -31,7 +37,7 @@ function Navbar() {
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             TungstenChemistry
-            <i class='fab fa-typo3' />
+            <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -51,23 +57,30 @@ function Navbar() {
                 Puzzles
               </Link>
             </li>
-            <li>
-              <Link
-                to='/sign-in'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Sign In
-              </Link>
-            </li>
-
-            <li className = 'nav-item'>
-                <h1 className='nav-links' onClick={closeMobileMenu}> 
-                {localStorage.getItem("name")} 
-                </h1>          
-            </li>
+            {!user ? (
+              <li>
+                <Link
+                  to='/sign-in'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+                >
+                  Sign In
+                </Link>
+              </li>
+            ) : (
+              <li className='nav-item'>
+                <div className='nav-links' onClick={toggleDropdown}>
+                  {localStorage.getItem("name")} <i className='fas fa-caret-down' />
+                </div>
+                {dropdown && (
+                  <div className='dropdown-menu'>
+                    <button onClick={signOutUser}>Sign Out</button>
+                  </div>
+                )}
+              </li>
+            )}
           </ul>
-          {button && <Button onClick ={ signInWithGoogle }buttonStyle='btn--outline'>SIGN IN</Button>}
+          {!user && button && <Button onClick={() => signInWithGoogle(navigate)} buttonStyle='btn--outline'>SIGN IN</Button>}
         </div>
       </nav>
     </>

@@ -1,14 +1,9 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getFirestore} from "firebase/firestore"
-import { GoogleAuthProvider, getAuth ,signInWithPopup} from "firebase/auth"
+import { getFirestore } from "firebase/firestore";
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDNB3bbv6u1T9eP6sDMw6791o-JMNRdYaY",
   authDomain: "tungsten-chemistry.firebaseapp.com",
@@ -19,26 +14,45 @@ const firebaseConfig = {
   measurementId: "G-KP852R1BPP"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export const db =  getFirestore(app);
+export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-const provider = new GoogleAuthProvider()
+const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
-  signInWithPopup(auth,provider)
-  .then((result) => {
-    const name = result.user.displayName;
-    const email = result.user.email;
-    const pfp = result.user.photoURL;
+export const signInWithGoogle = (navigate) => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user;
+      localStorage.setItem("name", user.displayName);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("pfp", user.photoURL);
+      navigate('/'); // Redirect to home after sign-in
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("pfp", pfp);
-  }).catch((error) => {
-    console.log(error);
-  })
+export const signOutUser = () => {
+  signOut(auth)
+    .then(() => {
+      localStorage.clear();
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const onAuthChange = (callback) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      callback(user);
+    } else {
+      callback(null);
+    }
+  });
 };
