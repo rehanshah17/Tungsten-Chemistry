@@ -43,13 +43,11 @@ export const signInWithGoogle = (navigate) => {
           createdAt: serverTimestamp(),
         });
         console.log("New user");
-        // Perform actions for new users
+        navigate('/sign-up');
       } else {
         console.log("Existing user");
-        // Perform actions for existing users
+        navigate('/');
       }
-
-      navigate('/');
     })
     .catch((error) => {
       console.log(error);

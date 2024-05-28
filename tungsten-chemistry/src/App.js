@@ -6,6 +6,7 @@ import './App.css';
 import Home from './components/pages/Home';
 import Puzzle from './components/pages/Puzzle';
 import CreatePost from './components/pages/CreatePost';
+import SignUp from './components/pages/SignUp';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' exact element={<Home />} />
         <Route path='/puzzles' exact element={<Puzzle />} />
         <Route path='/createpost' exact element={<CreatePost />} />
+        <Route path='/sign-up' exact element={<SignUp />} />
       </Routes>
     </Router>
   );

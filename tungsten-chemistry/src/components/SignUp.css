@@ -1,0 +1,59 @@
+/* SignUp.css */
+.App {
+    text-align: center;
+}
+
+.signUpPage {
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: grid;
+    place-items: center;
+}
+
+.suContainer {
+    width: 500px;
+    height: auto;
+    padding: 20px;
+    background-color: rgb(48, 48, 48);
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.suContainer h1 {
+    text-align: center;
+}
+
+.suContainer label {
+    font-size: 25px;
+}
+
+.suContainer .inputGp {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGp input,
+.inputGp select {
+    font-size: 18px;
+    border: none;
+    border-radius: 2px;
+    padding: 5px;
+    height: 40px;
+}
+
+.suContainer button {
+    margin-top: 20px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+input,
+select {
+    margin-top: 5px;
+}
