@@ -37,7 +37,7 @@ function Navbar() {
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             <img className="move-left" src={"/W.png"} width={45} height={45}/>
-            TungstenChemistry
+            Tungsten Chemistry
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />

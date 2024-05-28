@@ -81,3 +81,62 @@
     overflow: hidden;
     overflow-y: auto;
   }
+
+  /* Home.css */
+.homePage {
+    position: relative;
+    padding: 20px;
+  }
+  
+  .create-post-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+  
+  .create-post-button:hover {
+    background-color: #0056b3;
+  }
+
+  .homePage h1 {
+    margin-top: 80px; /* Adjust this value if necessary */
+  }
+  
+  .post {
+    margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .postHeader .title h1 {
+    margin: 0;
+  }
+  
+  .deletePost button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  

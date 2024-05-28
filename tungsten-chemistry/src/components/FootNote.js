@@ -11,8 +11,12 @@ function Footer() {
         </p>
         <p className='footer-subscription-text'>
            Contact Us:
-           rehans0906@gmail.com
-           chienleonllc@gmail.com
+        </p>
+        <p className='footer-subscription-text'>
+           Rehan - rehans0906@gmail.com
+        </p>
+        <p className='footer-subscription-text'>
+           Leon - chienleonllc@gmail.com
         </p>
       </section>
     </div>
