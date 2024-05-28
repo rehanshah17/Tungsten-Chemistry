@@ -4,17 +4,25 @@ import '../../App.css';
 import '../Home.css'; // Ensure the correct import path for Home.css
 import Footer from '../FootNote.js';
 import { onAuthChange } from "../../firebase";
-import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+import { getDocs, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
 
 function Home() {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState('');
   const [postLists, setPostList] = useState([]);
   const postsCollectionsRef = collection(db, "posts");
 
   const deletePost = async (id) => {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
+  };
+
+  const fetchUserRole = async (uid) => {
+    const userDoc = await getDoc(doc(db, "users", uid));
+    if (userDoc.exists()) {
+      setRole(userDoc.data().role);
+    }
   };
 
   useEffect(() => {
@@ -24,13 +32,18 @@ function Home() {
     };
     
     getPosts();
-    onAuthChange(setUser);
+    onAuthChange((user) => {
+      setUser(user);
+      if (user) {
+        fetchUserRole(user.uid);
+      }
+    });
   }, [deletePost]);
 
   return (
     <>
       <div className="homePage">
-        {user && (
+        {user && role === 'teacher' && (
           <Link to="/createpost">
             <button className="create-post-button">+</button>
           </Link>
@@ -79,3 +92,4 @@ function Home() {
 }
 
 export default Home;
+
