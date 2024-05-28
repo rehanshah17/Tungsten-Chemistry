@@ -10,7 +10,6 @@ import { auth, db } from '../../firebase';
 function Home() {
   const [user, setUser] = useState(null);
   const [postLists, setPostList] = useState([]);
-
   const postsCollectionsRef = collection(db, "posts");
 
   const deletePost = async (id) => {
@@ -23,9 +22,10 @@ function Home() {
       const data = await getDocs(postsCollectionsRef);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
+    
     getPosts();
     onAuthChange(setUser);
-  }, []);
+  }, [deletePost]);
 
   return (
     <>
@@ -45,10 +45,17 @@ function Home() {
                   <h1>{post.title}</h1>
                 </div>
                 <div className="deletePost">
-                  <button onClick={() => deletePost(post.id)}>
+                {user && post.author.id === auth.currentUser.uid && (
+                  <button
+                    onClick={() => {
+                      deletePost(post.id);
+                    }}
+                  >
+                    {" "}
                     &#128465;
                   </button>
-                </div>
+                )}
+              </div>
               </div>
               <div className="postTextContainer">{post.postText}</div>
               {post.link && (

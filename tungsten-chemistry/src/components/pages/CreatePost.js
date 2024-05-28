@@ -3,6 +3,8 @@ import '../CreatePost.css';
 import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
 import Footer from '../FootNote.js';
+import { useNavigate } from 'react-router-dom';
+
 
 function CreatePost() {
   const [title, setTitle] = useState("");
@@ -10,6 +12,7 @@ function CreatePost() {
   const [link, setLink] = useState("");
 
   const postsCollectionsRef = collection(db, "posts");
+  let navigate = useNavigate();
 
   const createPost = async () => {
     await addDoc(postsCollectionsRef, {
@@ -18,6 +21,7 @@ function CreatePost() {
       link,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
     });
+    navigate("/");
   };
 
   return (
