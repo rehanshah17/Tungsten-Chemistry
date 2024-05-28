@@ -1,3 +1,4 @@
+// NavBar.js
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -89,4 +90,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

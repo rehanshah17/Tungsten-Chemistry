@@ -1,6 +1,7 @@
+// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
@@ -23,11 +24,31 @@ const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle = (navigate) => {
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(async (result) => {
       const user = result.user;
       localStorage.setItem("name", user.displayName);
       localStorage.setItem("email", user.email);
       localStorage.setItem("pfp", user.photoURL);
+
+      const userRef = doc(db, 'users', user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (!docSnap.exists()) {
+        // First time user
+        await setDoc(userRef, {
+          uid: user.uid,
+          email: user.email,
+          name: user.displayName,
+          photoURL: user.photoURL,
+          createdAt: serverTimestamp(),
+        });
+        console.log("New user");
+        // Perform actions for new users
+      } else {
+        console.log("Existing user");
+        // Perform actions for existing users
+      }
+
       navigate('/');
     })
     .catch((error) => {
