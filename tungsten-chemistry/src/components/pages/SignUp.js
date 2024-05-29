@@ -25,7 +25,7 @@ const SignUp = () => {
         levelScore = 1000;
         break;
       default:
-        levelScore = 0; // Default or error value
+        levelScore = 0;
     }
 
     let role;
@@ -34,7 +34,7 @@ const SignUp = () => {
     } else if (auth.currentUser.email.endsWith('@gmail.com')) {
       role = 'student';
     } else {
-      role = 'student'; // Default role
+      role = 'student';
     }
 
     const userRef = doc(db, 'users', auth.currentUser.uid);

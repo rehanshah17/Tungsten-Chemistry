@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
-import '../Home.css'; // Ensure the correct import path for Home.css
+import '../Home.css';
 import Footer from '../FootNote.js';
 import { onAuthChange } from "../../firebase";
 import { getDocs, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';

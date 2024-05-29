@@ -1,8 +1,7 @@
-// Puzzle.js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
-import '../Puzzle.css'; // Ensure the correct import path for Puzzle.css
+import '../Puzzle.css';
 import Footer from '../FootNote';
 import { onAuthChange } from "../../firebase";
 import { getDocs, collection, getDoc, doc, addDoc, onSnapshot, query, where } from 'firebase/firestore';
@@ -35,7 +34,7 @@ function Puzzle() {
     const unsubscribe = onSnapshot(puzzlesCollectionRef, async (snapshot) => {
       const puzzles = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       if (puzzles.length > 0) {
-        const currentPuzzle = puzzles[0]; // Get the first (and only) puzzle
+        const currentPuzzle = puzzles[0];
         setPuzzle(currentPuzzle);
         const user = auth.currentUser;
         if (user) {
@@ -52,7 +51,7 @@ function Puzzle() {
       }
     });
 
-    return () => unsubscribe(); // Cleanup the listener on component unmount
+    return () => unsubscribe();
   }, []);
 
   const renderDifficulty = (difficulty) => {
@@ -73,18 +72,17 @@ function Puzzle() {
         name: auth.currentUser.displayName,
         uid: auth.currentUser.uid,
       },
-      graded: false, // Set graded to false at creation
+      graded: false, 
       createdAt: new Date()
     });
 
-    setResponse(''); // Clear the response input field
-    setShowPuzzle(false); // Hide the puzzle div
+    setResponse('');
+    setShowPuzzle(false); 
 
-    // Show animation
     setShowAnimation(true);
     setTimeout(() => {
       setShowAnimation(false);
-    }, 1000); // Duration of the animation
+    }, 1000); 
   };
 
   return (

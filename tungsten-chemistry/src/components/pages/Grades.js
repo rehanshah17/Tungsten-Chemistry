@@ -3,16 +3,14 @@ import { collection, getDocs, query, where, orderBy, updateDoc, doc, getDoc } fr
 import { db } from '../../firebase';
 import '../Grades.css';
 
-// Function to calculate the expected score
 function calculateExpectedScore(userLevelScore, questionDifficulty) {
   return 1 / (1 + Math.pow(10, (questionDifficulty - userLevelScore) / 400));
 }
 
-// Function to update the user's level score
 function updateLevelScore(userLevelScore, questionDifficulty, actualScore, K = 32) {
   const expectedScore = calculateExpectedScore(userLevelScore, questionDifficulty);
   const newLevelScore = userLevelScore + K * (actualScore - expectedScore);
-  return Math.round(newLevelScore); // Round to the nearest whole number
+  return Math.round(newLevelScore);
 }
 
 function Grades() {

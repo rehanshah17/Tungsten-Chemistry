@@ -1,4 +1,3 @@
-// CreatePuzzle.js
 import React, { useState } from "react";
 import '../CreatePost.css'; // Reuse the CSS from CreatePost
 import { collection, getDocs, addDoc, deleteDoc, query, where } from 'firebase/firestore';
@@ -28,8 +27,8 @@ function CreatePuzzle() {
   };
 
   const createPuzzle = async () => {
-    await clearExistingPuzzles(); // Clear existing puzzles before adding a new one
-    await deleteGradedResponses(); // Delete responses that were graded as true
+    await clearExistingPuzzles(); 
+    await deleteGradedResponses();
 
     await addDoc(puzzlesCollectionsRef, {
       question,
@@ -37,7 +36,7 @@ function CreatePuzzle() {
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
     });
 
-    navigate("/puzzles"); // Redirect to the puzzles page
+    navigate("/puzzles");
   };
 
   return (

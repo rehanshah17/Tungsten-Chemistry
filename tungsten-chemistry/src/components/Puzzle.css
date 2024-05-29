@@ -1,7 +1,6 @@
-/* Puzzle.css */
 .puzzlePage {
   padding: 20px;
-  position: relative; /* Ensure relative positioning to properly place the buttons */
+  position: relative;
 }
 
 .create-post-button {
@@ -86,13 +85,12 @@
   font-size: 18px;
 }
 
-/* Animation styles */
 .animationContainer {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000; /* Ensure it appears on top of other elements */
+  z-index: 1000; 
 }
 
 .flyingLogo {
@@ -106,6 +104,6 @@
     transform: scale(1);
   }
   100% {
-    transform: scale(10); /* Enlarge the icon */
+    transform: scale(10);
   }
 }

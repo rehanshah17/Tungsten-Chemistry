@@ -1,4 +1,3 @@
-// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -34,7 +33,6 @@ export const signInWithGoogle = (navigate) => {
       const docSnap = await getDoc(userRef);
 
       if (!docSnap.exists()) {
-        // First time user
         await setDoc(userRef, {
           uid: user.uid,
           email: user.email,

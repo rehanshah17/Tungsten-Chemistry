@@ -1,4 +1,3 @@
-// App.js
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -9,7 +8,7 @@ import Puzzle from './components/pages/Puzzle';
 import CreatePost from './components/pages/CreatePost';
 import SignUp from './components/pages/SignUp';
 import CreatePuzzle from './components/pages/CreatePuzzle';
-import Grades from './components/pages/Grades'; // Import the new Grades component
+import Grades from './components/pages/Grades'; 
 
 function App() {
   return (
@@ -21,7 +20,7 @@ function App() {
         <Route path='/createpost' exact element={<CreatePost />} />
         <Route path='/createpuzzle' exact element={<CreatePuzzle />} />
         <Route path='/sign-up' exact element={<SignUp />} />
-        <Route path='/grades' exact element={<Grades />} /> {/* Add route for Grades */}
+        <Route path='/grades' exact element={<Grades />} /> {}
       </Routes>
     </Router>
   );
