@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../CreatePost.css'; // Reuse the CSS from CreatePost
+import '../CreatePost.css';
 import { collection, getDocs, addDoc, deleteDoc, query, where } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
 import Footer from '../FootNote.js';

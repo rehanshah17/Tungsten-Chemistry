@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
-import '../SignUp.css'; // Import the new CSS file
+import '../SignUp.css';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
