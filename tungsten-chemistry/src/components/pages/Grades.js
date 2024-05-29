@@ -1,4 +1,3 @@
-// components/pages/Grades.js
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, query, where, orderBy, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
@@ -13,7 +12,7 @@ function calculateExpectedScore(userLevelScore, questionDifficulty) {
 function updateLevelScore(userLevelScore, questionDifficulty, actualScore, K = 32) {
   const expectedScore = calculateExpectedScore(userLevelScore, questionDifficulty);
   const newLevelScore = userLevelScore + K * (actualScore - expectedScore);
-  return newLevelScore;
+  return Math.round(newLevelScore); // Round to the nearest whole number
 }
 
 function Grades() {
