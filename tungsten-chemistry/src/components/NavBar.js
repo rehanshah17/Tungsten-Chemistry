@@ -13,6 +13,7 @@ function Navbar() {
   const [user, setUser] = useState(null);
   const [dropdown, setDropdown] = useState(false);
   const [role, setRole] = useState('');
+  const [levelScore, setLevelScore] = useState(null);
   const navigate = useNavigate();
 
   const handleClick = () => setClick(!click);
@@ -28,10 +29,12 @@ function Navbar() {
 
   const toggleDropdown = () => setDropdown(!dropdown);
 
-  const fetchUserRole = async (uid) => {
+  const fetchUserRoleAndLevelScore = async (uid) => {
     const userDoc = await getDoc(doc(db, "users", uid));
     if (userDoc.exists()) {
-      setRole(userDoc.data().role);
+      const userData = userDoc.data();
+      setRole(userData.role);
+      setLevelScore(userData.levelScore);
     }
   };
 
@@ -40,7 +43,7 @@ function Navbar() {
     onAuthChange((user) => {
       setUser(user);
       if (user) {
-        fetchUserRole(user.uid);
+        fetchUserRoleAndLevelScore(user.uid);
       }
     });
   }, []);
@@ -102,6 +105,7 @@ function Navbar() {
                 </div>
                 {dropdown && (
                   <div className='dropdown-menu'>
+                    <div className="level-score">Atomic #: {levelScore}</div>
                     <button onClick={signOutUser}>Sign Out</button>
                   </div>
                 )}

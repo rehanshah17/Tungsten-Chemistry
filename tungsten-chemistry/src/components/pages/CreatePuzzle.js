@@ -1,6 +1,7 @@
+// CreatePuzzle.js
 import React, { useState } from "react";
 import '../CreatePost.css'; // Reuse the CSS from CreatePost
-import { collection, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, deleteDoc, query, where } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
 import Footer from '../FootNote.js';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ function CreatePuzzle() {
   const [difficulty, setDifficulty] = useState("");
 
   const puzzlesCollectionsRef = collection(db, "puzzles");
+  const responsesCollectionRef = collection(db, "responses");
   let navigate = useNavigate();
 
   const clearExistingPuzzles = async () => {
@@ -18,8 +20,16 @@ function CreatePuzzle() {
     await Promise.all(deletePromises);
   };
 
+  const deleteGradedResponses = async () => {
+    const q = query(responsesCollectionRef, where('graded', '==', true));
+    const responseDocs = await getDocs(q);
+    const deletePromises = responseDocs.docs.map(doc => deleteDoc(doc.ref));
+    await Promise.all(deletePromises);
+  };
+
   const createPuzzle = async () => {
     await clearExistingPuzzles(); // Clear existing puzzles before adding a new one
+    await deleteGradedResponses(); // Delete responses that were graded as true
 
     await addDoc(puzzlesCollectionsRef, {
       question,

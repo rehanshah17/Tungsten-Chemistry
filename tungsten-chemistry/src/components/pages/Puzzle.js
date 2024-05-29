@@ -1,10 +1,11 @@
+// Puzzle.js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
 import '../Puzzle.css'; // Ensure the correct import path for Puzzle.css
 import Footer from '../FootNote';
 import { onAuthChange } from "../../firebase";
-import { getDocs, collection, getDoc, doc, addDoc, onSnapshot } from 'firebase/firestore';
+import { getDocs, collection, getDoc, doc, addDoc, onSnapshot, query, where } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
 
 function Puzzle() {
@@ -12,8 +13,8 @@ function Puzzle() {
   const [role, setRole] = useState('');
   const [puzzle, setPuzzle] = useState(null);
   const [response, setResponse] = useState('');
-  const [showPuzzle, setShowPuzzle] = useState(true);
-  const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
+  const [showPuzzle, setShowPuzzle] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
   const puzzlesCollectionRef = collection(db, "puzzles");
   const responsesCollectionRef = collection(db, "responses");
 
@@ -24,15 +25,23 @@ function Puzzle() {
     }
   };
 
+  const checkUserResponse = async (user, puzzle) => {
+    const q = query(responsesCollectionRef, where('user.uid', '==', user.uid), where('question', '==', puzzle.question));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.empty;
+  };
+
   useEffect(() => {
-    const unsubscribe = onSnapshot(puzzlesCollectionRef, (snapshot) => {
+    const unsubscribe = onSnapshot(puzzlesCollectionRef, async (snapshot) => {
       const puzzles = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       if (puzzles.length > 0) {
-        setPuzzle(puzzles[0]); // Get the first (and only) puzzle
-        setShowPuzzle(true);
-      } else {
-        setPuzzle(null);
-        setShowPuzzle(false);
+        const currentPuzzle = puzzles[0]; // Get the first (and only) puzzle
+        setPuzzle(currentPuzzle);
+        const user = auth.currentUser;
+        if (user) {
+          const hasNotSubmitted = await checkUserResponse(user, currentPuzzle);
+          setShowPuzzle(hasNotSubmitted);
+        }
       }
     });
 
@@ -53,12 +62,8 @@ function Puzzle() {
     return `Difficulty: ${difficulty}`;
   };
 
-  const submitResponse = async (event) => {
+  const submitResponse = async () => {
     if (!response.trim()) return;
-
-    // Get click position
-    const { clientX: x, clientY: y } = event;
-    setClickPosition({ x, y });
 
     await addDoc(responsesCollectionRef, {
       question: puzzle.question,
@@ -68,11 +73,18 @@ function Puzzle() {
         name: auth.currentUser.displayName,
         uid: auth.currentUser.uid,
       },
+      graded: false, // Set graded to false at creation
       createdAt: new Date()
     });
 
     setResponse(''); // Clear the response input field
     setShowPuzzle(false); // Hide the puzzle div
+
+    // Show animation
+    setShowAnimation(true);
+    setTimeout(() => {
+      setShowAnimation(false);
+    }, 1000); // Duration of the animation
   };
 
   return (
@@ -108,10 +120,12 @@ function Puzzle() {
             <button onClick={submitResponse} className="submitResponseButton">Submit Response</button>
             <p>Max 500 Characters</p>
           </div>
-        ) : <p>No current puzzle available. Please wait for a new puzzle.</p>}
-        <div className="animationContainer" style={{ left: clickPosition.x, top: clickPosition.y }}>
-          <img src="../../../public/W.png" alt="Tungsten Logo" className="flyingLogo" />
-        </div>
+        ) : <p>No current puzzle available or you have already submitted a response for this puzzle.</p>}
+        {showAnimation && (
+          <div className="animationContainer">
+            <img src="/W.png" alt="Tungsten Logo" className="flyingLogo" />
+          </div>
+        )}
       </div>
       <Footer />
     </>
