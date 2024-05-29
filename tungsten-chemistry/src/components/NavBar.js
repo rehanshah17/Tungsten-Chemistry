@@ -4,12 +4,15 @@ import { Button } from './Button';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import { signInWithGoogle, onAuthChange, signOutUser } from "../firebase";
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [user, setUser] = useState(null);
   const [dropdown, setDropdown] = useState(false);
+  const [role, setRole] = useState('');
   const navigate = useNavigate();
 
   const handleClick = () => setClick(!click);
@@ -25,9 +28,21 @@ function Navbar() {
 
   const toggleDropdown = () => setDropdown(!dropdown);
 
+  const fetchUserRole = async (uid) => {
+    const userDoc = await getDoc(doc(db, "users", uid));
+    if (userDoc.exists()) {
+      setRole(userDoc.data().role);
+    }
+  };
+
   useEffect(() => {
     showButton();
-    onAuthChange(setUser); // Listen for auth state changes
+    onAuthChange((user) => {
+      setUser(user);
+      if (user) {
+        fetchUserRole(user.uid);
+      }
+    });
   }, []);
 
   window.addEventListener('resize', showButton);
@@ -58,6 +73,17 @@ function Navbar() {
                 Puzzles
               </Link>
             </li>
+            {role === 'teacher' && (
+              <li className='nav-item'>
+                <Link
+                  to='/grades'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >
+                  Grades
+                </Link>
+              </li>
+            )}
             {!user ? (
               <li>
                 <Link
