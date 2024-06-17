@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tungsten-chemistry/static/css/main.cecc2710.css",
+    "main.js": "/tungsten-chemistry/static/js/main.62812078.js",
+    "index.html": "/tungsten-chemistry/index.html",
+    "main.cecc2710.css.map": "/tungsten-chemistry/static/css/main.cecc2710.css.map",
+    "main.62812078.js.map": "/tungsten-chemistry/static/js/main.62812078.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cecc2710.css",
+    "static/js/main.62812078.js"
+  ]
+}
